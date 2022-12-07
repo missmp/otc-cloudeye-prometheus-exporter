@@ -1,16 +1,9 @@
-version: '3'
+version: '3.9'
 
 services:
   otc-exporter:
     restart: always
-    image: tiagoreichert/otc-cloudeye-prometheus-exporter
+    build: .
     ports:
       - "8000:8000"
     environment:
-      - REFRESH_TIME=300
-      - NAMESPACES=ECS,DMS
-      - PROJECT_ID=<projectid>
-      - TENANT_NAME=OTC-EU-DE-<tentantnumber>
-      - USERNAME=foo
-      - PASSWORD=bar
-      - LOG_LEVEL=DEBUG
