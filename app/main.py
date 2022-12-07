@@ -180,7 +180,7 @@ def get_metric_value(prometheus_metrics, metrics):
     # For each OTC metric from the defined Namespaces
     for idx, m in enumerate(metrics, start=1):
         # After every 10 metrics sleep for 1 seconds (otherwise OTC API get's overloaded)
-        if idx % 10 == 0:
+        if idx % 3 == 0:
             time.sleep(1)
 
         namespace = m["namespace"]
@@ -197,7 +197,7 @@ def get_metric_value(prometheus_metrics, metrics):
               "&filter=average".format(cloud_eye_base, namespace, metric_name, dimensions_name, dimensions_value,
                                        current_time[0], current_time[1])
 
-        time.sleep(0.1)  # Wait for 100 milliseconds before every request (needed to don't overload OTC API)
+        time.sleep(1)  # Wait for 100 milliseconds before every request (needed to don't overload OTC API)
         r = requests.get(url, headers={'X-Auth-Token': get_token()})
 
         if r.status_code == 200:
